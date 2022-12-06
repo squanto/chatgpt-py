@@ -7,7 +7,7 @@ escape==1.1
 filelock==3.8.2
 Flask==2.2.2
 graphviz==0.8.4
-greenlet==0.4.13
+greenlet==2.0.0a2
 hpy==0.0.3
 idna==3.4
 importlib-metadata==5.1.0
