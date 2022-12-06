@@ -87,17 +87,15 @@ def query():
 
     chat_interface_class_name = 'prose'
     response_timeout_seconds = 15
-    present_prose_xpath = '(//div[@class="prose" and normalize-space()])[last()]'
+    present_prose_xpath = "(//div[contains(@class, 'prose')])"
     chat_responses = wait_find_elements(driver, By.XPATH, present_prose_xpath, timeout=response_timeout_seconds)
 
-    # [element.text() for element in driver.find_elements(By.CLASS_NAME, chat_interface_class_name)]
+    # hydrated_responses = WebDriverWait(driver, 10).until(
+    #     lambda driver: [element.text() for element in driver.find_elements(By.CLASS_NAME, chat_interface_class_name)]
+    # )
+    # wait until the chat responses have text in them
 
-    # WebDriverWait(driver,5).until(EC.visibility_of_element_located((By.XPATH, '//*[@class="propse"]')))
-
-    hydrated_responses = WebDriverWait(driver, response_timeout_seconds).until(
-        lambda driver: [element.text() for element in driver.find_elements(By.CLASS_NAME, chat_interface_class_name)]
-    )
-    last_chat_response = hydrated_responses[len(hydrated_responses) - 1]
+    last_chat_response = chat_responses[-1]
     response = {
         'response': last_chat_response.text
     }
